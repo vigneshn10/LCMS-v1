@@ -283,43 +283,73 @@ closest research lineage is listed below. The sampler/table association follows
 sampling dead-block prediction; the seven hashed perspectives and signed online
 updates follow perceptron and multiperspective reuse prediction; the recurrent
 controller draws on GRUs and learned optimizers; and the teacher-label loop is
-related to dataset aggregation. SHiP, Hawkeye, and LeCaR are included as the
-most relevant neighboring cache-policy work used to compare and sanity-check
+related to dataset aggregation. Belady's optimal policy, DIP, RRIP, early
+dead-block prediction, perceptron branch prediction, SHiP, Hawkeye, and LeCaR
+provide the foundational or neighboring work used to compare and sanity-check
 the design choices.
 
-1. D. A. Jiménez and E. Teran, “Multiperspective Reuse Prediction,” *MICRO-50*,
-   pp. 436–448, 2017. [doi:10.1145/3123939.3123942](https://doi.org/10.1145/3123939.3123942)
-2. E. Teran, Z. Wang, and D. A. Jiménez, “Perceptron Learning for Reuse
-   Prediction,” *MICRO-49*, pp. 1–12, 2016.
-   [doi:10.1109/MICRO.2016.7783705](https://doi.org/10.1109/MICRO.2016.7783705)
-3. S. M. Khan, Y. Tian, and D. A. Jiménez, “Sampling Dead Block Prediction for
-   Last-Level Caches,” *MICRO-43*, pp. 175–186, 2010.
-   [doi:10.1109/MICRO.2010.24](https://doi.org/10.1109/MICRO.2010.24)
-4. C.-J. Wu, A. Jaleel, W. Hasenplaugh, M. Martonosi, S. C. Steely Jr., and
-   J. Emer, “SHiP: Signature-based Hit Predictor for High Performance Caching,”
-   *MICRO-44*, pp. 430–441, 2011.
-   [doi:10.1145/2155620.2155671](https://doi.org/10.1145/2155620.2155671)
-5. A. Jain and C. Lin, “Back to the Future: Leveraging Belady’s Algorithm for
-   Improved Cache Replacement,” *ISCA-43*, pp. 78–89, 2016.
-   [doi:10.1109/ISCA.2016.17](https://doi.org/10.1109/ISCA.2016.17)
-6. K. Cho, B. van Merriënboer, Ç. Gülçehre, D. Bahdanau, F. Bougares,
+### Research references (alphabetical by first author)
+
+1. M. Andrychowicz, M. Denil, S. Gómez, M. W. Hoffman, D. Pfau, T. Schaul,
+   B. Shillingford, and N. de Freitas, “Learning to Learn by Gradient Descent
+   by Gradient Descent,” *NeurIPS 29*, 2016.
+   [Proceedings](https://proceedings.neurips.cc/paper_files/paper/2016/hash/fb87582825f9d28a8d42c5e5e5e8b23d-Abstract.html)
+2. L. A. Belady, “A Study of Replacement Algorithms for a Virtual-Storage
+   Computer,” *IBM Systems Journal*, vol. 5, no. 2, pp. 78–101, 1966.
+   [doi:10.1147/sj.52.0078](https://doi.org/10.1147/sj.52.0078)
+3. K. Cho, B. van Merriënboer, Ç. Gülçehre, D. Bahdanau, F. Bougares,
    H. Schwenk, and Y. Bengio, “Learning Phrase Representations using RNN
    Encoder–Decoder for Statistical Machine Translation,” *EMNLP*, pp.
    1724–1734, 2014. [arXiv:1406.1078](https://arxiv.org/abs/1406.1078)
-7. M. Andrychowicz et al., “Learning to Learn by Gradient Descent by Gradient
-   Descent,” *NeurIPS 29*, 2016.
-   [Proceedings](https://papers.nips.cc/paper_files/paper/2016/hash/fb87582825f9d28a8d42c5e5e5e8b23d-Abstract.html)
-8. S. Ross, G. Gordon, and D. Bagnell, “A Reduction of Imitation Learning and
-   Structured Prediction to No-Regret Online Learning,” *AISTATS*, PMLR 15,
-   pp. 627–635, 2011. [PMLR](https://proceedings.mlr.press/v15/ross11a.html)
-9. G. Vietri et al., “Driving Cache Replacement with ML-based LeCaR,”
-   *HotStorage ’18*, 2018.
-   [USENIX](https://www.usenix.org/conference/hotstorage18/presentation/vietri)
+4. S. Hochreiter, A. S. Younger, and P. R. Conwell, “Learning to Learn Using
+   Gradient Descent,” *ICANN*, pp. 87–94, 2001.
+   [doi:10.1007/3-540-44668-0_13](https://doi.org/10.1007/3-540-44668-0_13)
+5. A. Jain and C. Lin, “Back to the Future: Leveraging Belady’s Algorithm for
+   Improved Cache Replacement,” *ISCA-43*, pp. 78–89, 2016.
+   [doi:10.1109/ISCA.2016.17](https://doi.org/10.1109/ISCA.2016.17)
+6. A. Jaleel, K. B. Theobald, S. C. Steely Jr., and J. Emer, “High Performance
+   Cache Replacement Using Re-Reference Interval Prediction (RRIP),” *ISCA-37*,
+   pp. 60–71, 2010.
+   [doi:10.1145/1816038.1815971](https://doi.org/10.1145/1816038.1815971)
+7. D. A. Jiménez and C. Lin, “Dynamic Branch Prediction with Perceptrons,”
+   *HPCA-7*, pp. 197–206, 2001.
+   [doi:10.1109/HPCA.2001.903263](https://doi.org/10.1109/HPCA.2001.903263)
+8. D. A. Jiménez and E. Teran, “Multiperspective Reuse Prediction,” *MICRO-50*,
+   pp. 436–448, 2017.
+   [doi:10.1145/3123939.3123942](https://doi.org/10.1145/3123939.3123942)
+9. S. M. Khan, Y. Tian, and D. A. Jiménez, “Sampling Dead Block Prediction for
+   Last-Level Caches,” *MICRO-43*, pp. 175–186, 2010.
+   [doi:10.1109/MICRO.2010.24](https://doi.org/10.1109/MICRO.2010.24)
+10. A.-C. Lai, C. Fide, and B. Falsafi, “Dead-Block Prediction & Dead-Block
+    Correlating Prefetchers,” *ISCA-28*, pp. 144–154, 2001.
+    [doi:10.1145/379240.379259](https://doi.org/10.1145/379240.379259)
+11. M. K. Qureshi, A. Jaleel, Y. N. Patt, S. C. Steely Jr., and J. Emer,
+    “Adaptive Insertion Policies for High Performance Caching,” *ISCA-34*,
+    pp. 381–391, 2007.
+    [doi:10.1145/1250662.1250709](https://doi.org/10.1145/1250662.1250709)
+12. S. Ross, G. Gordon, and D. Bagnell, “A Reduction of Imitation Learning and
+    Structured Prediction to No-Regret Online Learning,” *AISTATS*, PMLR 15,
+    pp. 627–635, 2011. [PMLR](https://proceedings.mlr.press/v15/ross11a.html)
+13. E. Teran, Z. Wang, and D. A. Jiménez, “Perceptron Learning for Reuse
+    Prediction,” *MICRO-49*, pp. 1–12, 2016.
+    [doi:10.1109/MICRO.2016.7783705](https://doi.org/10.1109/MICRO.2016.7783705)
+14. G. Vietri et al., “Driving Cache Replacement with ML-based LeCaR,”
+    *HotStorage ’18*, 2018.
+    [USENIX](https://www.usenix.org/conference/hotstorage18/presentation/vietri)
+15. C.-J. Wu, A. Jaleel, W. Hasenplaugh, M. Martonosi, S. C. Steely Jr., and
+    J. Emer, “SHiP: Signature-based Hit Predictor for High Performance Caching,”
+    *MICRO-44*, pp. 430–441, 2011.
+    [doi:10.1145/2155620.2155671](https://doi.org/10.1145/2155620.2155671)
 
-OpenAI Codex and Anthropic Claude were used as AI-assisted code-review and
-documentation-review tools during verification. Their output was treated as a
+### AI-assisted verification references (alphabetical by organization)
+
+AI-assisted code and documentation review used **Anthropic Claude Opus 4.8**
+and **OpenAI GPT-5.6 Sol (through Codex)**. Their output was treated as a
 hypothesis source, not proof: source-path fixes were checked on a clean clone,
 RTL claims were checked against the implementation, and behavioral claims were
-accepted only when reproduced by the cocotb suites. Product references:
-[OpenAI Codex documentation](https://developers.openai.com/) and
-[Anthropic Claude Code documentation](https://code.claude.com/docs/en/overview).
+accepted only when reproduced by the cocotb suites.
+
+1. Anthropic, “Claude Opus 4.8 System Card,” 2026.
+   [System card](https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea/Claude%20Opus%204.8%20System%20Card.pdf)
+2. OpenAI, “GPT-5.6 Sol Model,” 2026.
+   [Official model documentation](https://developers.openai.com/api/docs/models/gpt-5.6-sol)

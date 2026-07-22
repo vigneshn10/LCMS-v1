@@ -70,8 +70,7 @@ paper](https://arxiv.org/abs/1406.1078) and
 bibliography and the distinction between direct lineage and neighboring work
 are at the end of the [main README](../README.md#research-lineage-and-verification-disclosure).
 
-OpenAI Codex and Anthropic Claude were used for AI-assisted review, with every
-accepted claim checked against source, simulation, or generated reports rather
-than accepted on model authority. See the official [OpenAI Codex
-documentation](https://developers.openai.com/) and [Anthropic Claude Code
-documentation](https://code.claude.com/docs/en/overview).
+AI-assisted review used **Anthropic Claude Opus 4.8** and **OpenAI GPT-5.6 Sol
+(through Codex)**, with every accepted claim checked against source, simulation,
+or generated reports rather than accepted on model authority. Alphabetical
+research and model references appear in the [main README](../README.md#research-lineage-and-verification-disclosure).
