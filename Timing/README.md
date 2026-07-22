@@ -48,3 +48,15 @@ not affect the setup/hold results above, which are clean.
 everything here. They need a kit directory (`$KIT`) with the OpenROAD binary,
 ASAP7 LEF/Liberty, and the synthesized netlist; neither the PDK nor the tool
 binary is redistributed in this repository.
+
+## Project methodology and verification provenance
+
+Timing is one layer of the project methodology; it does not validate prediction
+quality. The end-to-end algorithm, verification boundaries, research citations,
+and AI-assisted review disclosure are documented in the main README’s
+[methodology](../README.md#methodology) and [research-lineage and verification
+section](../README.md#research-lineage-and-verification-disclosure). OpenAI
+Codex and Anthropic Claude assisted review, but report files and reproducible
+tool runs—not model agreement—are the timing evidence. Official product
+references: [OpenAI Codex](https://developers.openai.com/) and [Anthropic Claude
+Code](https://code.claude.com/docs/en/overview).

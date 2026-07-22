@@ -1,15 +1,20 @@
 # V2 Roadmap — dual-path cache-management block
 *(fast path → latency, slow path → throughput)*
 
-Written 2026-07-22. Every feasibility verdict below was made by reading the actual
-RTL (`top/cache_top_rtl/*.sv`), then independently attacked by a second reviewer
-against the same RTL; none were refuted. Baseline numbers are measured, not estimated.
+Written 2026-07-22. Every feasibility verdict below was made by reading the
+actual RTL under `RTL/`, then challenged in AI-assisted review passes using
+Anthropic Claude and OpenAI Codex. A claim was retained only when it could be
+confirmed in source, simulation, or generated reports; model agreement alone
+was not treated as verification. See the main README’s [verification
+disclosure](README.md#research-lineage-and-verification-disclosure). Baseline
+numbers are measured, not estimated.
 
 ---
 
 ## 1. V1 baseline (measured today, CTS-stage characterization)
 
-`pnr_kit/run_cts.sh` — floorplan → place → CTS → post-CTS opt, ASAP7, 4000 ps target:
+`Timing/scripts/run_cts.sh` — floorplan → place → CTS → post-CTS optimization,
+ASAP7, 4000 ps target:
 
 | metric | value |
 |---|---|
@@ -113,49 +118,79 @@ record from day one.**
 - Guard against the known failure mode: don't let the pyuvm layer grow past
   driver/monitor/scoreboard parity — the SV-UVM bench is the resume/lab artifact.
 
-## 6. Week-by-week plan
+## 6. Milestone plan and exit gates
 
-**Week 0 — v1 close-out + measurements that gate v2 decisions** *(≤1 day of runs)*
-1. Timing autopsy of the 333 MHz routed netlist: split WNS into macro-Tcq /
-   logic / net delay → decides conditional item 5 (CSA fusion).
-2. Run the real workload; read `st_drop` (`orchestrator_top.sv:276`) and
-   `obs_dropped` (`slowpath.sv:516-518`) → decides conditional item 6 (banking).
-3. Free wins on v1 kit now: add `set_false_path` on `bd_*`/`csr_*`/status ports
-   to the SDC template (study says ~130 over-constrained paths).
+The work is ordered by technical dependency, not by calendar. A milestone is
+complete only when its exit gate is met; conditional optimizations stay out of
+scope until measurements justify them.
 
-**Week 1 — slowpath verification, then pipelining** *(the critical path of the project)*
-1. Reconcile the slowpath featurizer + quantisation against golden model v2
-   (prerequisite). The 256-observation replay bench already exists and passes;
-   what is missing is agreement that `X_DIM`/`H_DIM` and the fixed-point formats
-   are the *intended* ones.
-2. Fix 1: split `act_f→rh_mul` and `act_f→blend` into 2 cycles (~72 flops, ~1 day
-   RTL) → expected ~385 MHz shared-clock wall on ASAP7 terms.
-3. Fix 2: shared activation unit refactor if Fix 1's new wall (S_ACTO cone) matters.
-4. Re-run `run_cts.sh` after each fix — 15-min feedback loop, no routing needed.
+### Milestone A — baseline integrity and decision measurements
 
-**Week 2 — hierarchy + physical enablers**
-1. Drop `-flatten` from synth; re-run LEC + gate-level sims (name-form rework).
-2. SDC: path groups (`u_fast/*` prioritized), per-module Vt intent (u_fast
-   LVT/SLVT-eligible, u_slow RVT), slowpath MCP-2 rider where contract-safe.
-3. P&R Phase A: manual macro placement — 7 `u_fast` banks clustered near the
-   sampler-table flops + pin constraints (works on the *current* netlist already).
-4. Gate: does 333 MHz close? (−174 ps is the target to beat; study says yes.)
+1. Split the 333 MHz routed-netlist WNS into macro-Tcq, logic, and net delay to
+   decide whether CSA fusion is justified.
+2. Run the representative workload and inspect `st_drop` and `obs_dropped` to
+   decide whether slow-path banking or unrolling is justified.
+3. Correct the SDC treatment of asynchronous debug, CSR, and status ports, then
+   regenerate the baseline reports.
 
-**Week 3 — sky130 port begins + UVM scaffolding**
-1. sky130hd: generate/qualify a 256×8 1RW SRAM (OpenRAM or SRAM22; fall back to
-   pre-hardened efabless macros if the generator fights back).
-2. Port synthesis (yosys hierarchical) + ORFS bottom-up: harden `fastpath` as its
-   own block first (smallest, cleanest contract).
-3. In parallel locally: pyuvm bench up on v2 RTL (predict + train + tune agents,
-   scoreboard = existing cocotb checks).
+**Exit gate:** the baseline is reproducible, each conditional optimization has
+a measured trigger, and constraints pass an explicit sanity review.
 
-**Week 4 — v2 assembly + verification depth**
-1. Harden `slowpath`, assemble top on sky130, two clocks (fast/slow) — CDC split
-   *only if* the Week-1/2 measurements show slowpath still constrains the fast
-   clock after pipelining (study expects it won't).
-2. SV-UVM on Xcelium: port env structure from pyuvm; add covergroups + SVA
-   (tune-latch atomicity, valid/ready protocols, FIFO gray-code if CDC went in).
-3. Characterize v2 vs the §1 baseline table; write up in ratio terms.
+### Milestone B — numerical reconciliation and slow-path pipelining
+
+1. Reconcile the slow-path featurizer, `X_DIM`/`H_DIM`, and quantization against
+   golden model v2. The 256-observation replay proves RTL/model equivalence but
+   does not yet prove that the model expresses the intended algorithm.
+2. Split the `act_f→rh_mul` and `act_f→blend` cones across two cycles while
+   preserving observation, tune, and label handshakes.
+3. Refactor the shared activation unit only if the new timing report identifies
+   the `S_ACTO` cone as the next limiter.
+4. Re-run `Timing/scripts/run_cts.sh` after each structural change.
+
+**Exit gate:** golden replay remains bit-exact, protocol assertions pass, and
+the shared-clock implementation reaches its measured post-pipeline target.
+
+### Milestone C — hierarchy and physical-design controls
+
+1. Preserve module hierarchy in synthesis and re-run logical-equivalence and
+   gate-level simulation checks.
+2. Add path groups and contract-safe timing exceptions; encode per-module cell
+   intent without weakening the one-cycle fast-path or atomic tuning contracts.
+3. Place the seven fast-path SRAMs with the orchestrator sampler flops they
+   communicate with, then apply pin constraints.
+4. Compare the new result with the prior −174 ps result at 333 MHz.
+
+**Exit gate:** 333 MHz closes on the ASAP7 characterization flow with all
+exceptions reviewed and no functional regression.
+
+### Milestone D — manufacturable platform and verification structure
+
+1. Generate or qualify a sky130hd 256×8 1RW SRAM, preferring OpenRAM or SRAM22
+   and using a pre-hardened compatible macro if generation is not viable.
+2. Port hierarchical synthesis and the ORFS bottom-up flow, hardening `fastpath`
+   first because it has the smallest and clearest interface contract.
+3. Restructure the local cocotb environment into pyuvm agents, monitors,
+   sequences, and a scoreboard while retaining the current reference models.
+4. Establish the SV-UVM environment on Xcelium with matching transactions and
+   scoreboards before adding coverage-specific features.
+
+**Exit gate:** the fast path hardens with a qualified SRAM, and the pyuvm and
+SV-UVM environments agree on the same smoke-test transactions.
+
+### Milestone E — integration and qualification
+
+1. Harden `slowpath` and assemble the sky130 top. Introduce separate fast and
+   slow clocks only if the earlier measurements show that the pipelined slow path
+   still limits the required fast clock.
+2. Add covergroups and concurrent assertions for tune-latch atomicity,
+   valid/ready protocols, reset behavior, and FIFO gray-code rules if CDC exists.
+3. Run functional regression, gate-level checks, CDC/reset analysis where
+   applicable, and physical characterization.
+4. Compare v2 with the §1 baseline using latency, throughput, frequency ratio,
+   area, power, drop rate, and coverage—not raw frequency alone.
+
+**Exit gate:** v2 meets its functional contracts, has reviewable coverage and
+timing evidence, and its results are reported with reproducible commands.
 
 ## 7. Explicitly not doing (and why — so it doesn't get re-litigated)
 

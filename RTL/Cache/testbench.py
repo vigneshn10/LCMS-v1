@@ -620,7 +620,7 @@ if __name__ == "__main__":
     proj = Path(__file__).resolve().parent
     runner = get_runner(sim)
     runner.build(
-        verilog_sources=[proj / "design.sv"],
+        sources=[proj / "orchestrator_top.sv"],
         includes=[proj],
         hdl_toplevel="orchestrator_top",
         always=True,
