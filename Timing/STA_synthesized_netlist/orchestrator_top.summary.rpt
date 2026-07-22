@@ -1,0 +1,16 @@
+================ STA SUMMARY : orchestrator_top (synthesized netlist) ================
+methodology       : pre-layout STA, ideal interconnect, ideal clock
+corner            : ASAP7 rev28 1x, TT, 0.7 V, 25 C (NLDM)
+clock period      : 5500 ps (181.8 MHz)
+uncertainty       : setup 110.0 ps / hold 10 ps
+io                : in 100/50 ps, 50 ps transition; out 100/0 ps, 10 fF
+--------------------------------------------------------------------------
+worst setup slack : +167.7 ps   (critical path 5332.3 ps)
+worst hold slack  : +12.9 ps
+check_setup       : clean - no unclocked registers, no unconstrained endpoints
+scope             : setup/hold/recovery/removal timing. Electrical-rule
+                    (max-cap/slew) closure is an implementation-stage task
+                    and is out of scope for netlist STA; fanout loading is
+                    nonetheless fully reflected in the reported delays.
+tns max 0.00
+wns max 0.00

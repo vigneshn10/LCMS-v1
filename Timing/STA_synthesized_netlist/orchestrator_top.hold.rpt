@@ -1,0 +1,290 @@
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _102975_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ rst_n (in)
+   0.000   50.000 ^ _102975_/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+           50.000   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ _102975_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  27.137   37.137   library removal time
+           37.137   data required time
+-----------------------------------------------------------
+           37.137   data required time
+          -50.000   data arrival time
+-----------------------------------------------------------
+           12.863   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _102976_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ rst_n (in)
+   0.000   50.000 ^ _102976_/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+           50.000   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ _102976_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  27.137   37.137   library removal time
+           37.137   data required time
+-----------------------------------------------------------
+           37.137   data required time
+          -50.000   data arrival time
+-----------------------------------------------------------
+           12.863   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _102977_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ rst_n (in)
+   0.000   50.000 ^ _102977_/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+           50.000   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ _102977_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  27.137   37.137   library removal time
+           37.137   data required time
+-----------------------------------------------------------
+           37.137   data required time
+          -50.000   data arrival time
+-----------------------------------------------------------
+           12.863   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _102978_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ rst_n (in)
+   0.000   50.000 ^ _102978_/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+           50.000   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ _102978_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  27.137   37.137   library removal time
+           37.137   data required time
+-----------------------------------------------------------
+           37.137   data required time
+          -50.000   data arrival time
+-----------------------------------------------------------
+           12.863   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _102979_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ rst_n (in)
+   0.000   50.000 ^ _102979_/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+           50.000   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ _102979_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  27.137   37.137   library removal time
+           37.137   data required time
+-----------------------------------------------------------
+           37.137   data required time
+          -50.000   data arrival time
+-----------------------------------------------------------
+           12.863   slack (MET)
+
+
+Startpoint: bd_fp_mask[0] (input port clocked by clk)
+Endpoint: u_fast.g_banks[0].u_bank
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ bd_fp_mask[0] (in)
+  42.402   92.402 ^ _059425_/Y (AO21x1_ASAP7_75t_R)
+   0.000   92.402 ^ u_fast.g_banks[0].u_bank/ce_in (fakeram7_256x8)
+           92.402   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ u_fast.g_banks[0].u_bank/clk (fakeram7_256x8)
+  50.000   60.000   library hold time
+           60.000   data required time
+-----------------------------------------------------------
+           60.000   data required time
+          -92.402   data arrival time
+-----------------------------------------------------------
+           32.402   slack (MET)
+
+
+Startpoint: bd_fp_mask[1] (input port clocked by clk)
+Endpoint: u_fast.g_banks[1].u_bank
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ bd_fp_mask[1] (in)
+  42.402   92.402 ^ _059413_/Y (AO21x1_ASAP7_75t_R)
+   0.000   92.402 ^ u_fast.g_banks[1].u_bank/ce_in (fakeram7_256x8)
+           92.402   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ u_fast.g_banks[1].u_bank/clk (fakeram7_256x8)
+  50.000   60.000   library hold time
+           60.000   data required time
+-----------------------------------------------------------
+           60.000   data required time
+          -92.402   data arrival time
+-----------------------------------------------------------
+           32.402   slack (MET)
+
+
+Startpoint: bd_fp_mask[2] (input port clocked by clk)
+Endpoint: u_fast.g_banks[2].u_bank
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ bd_fp_mask[2] (in)
+  42.402   92.402 ^ _059398_/Y (AO21x1_ASAP7_75t_R)
+   0.000   92.402 ^ u_fast.g_banks[2].u_bank/ce_in (fakeram7_256x8)
+           92.402   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ u_fast.g_banks[2].u_bank/clk (fakeram7_256x8)
+  50.000   60.000   library hold time
+           60.000   data required time
+-----------------------------------------------------------
+           60.000   data required time
+          -92.402   data arrival time
+-----------------------------------------------------------
+           32.402   slack (MET)
+
+
+Startpoint: bd_fp_mask[3] (input port clocked by clk)
+Endpoint: u_fast.g_banks[3].u_bank
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ bd_fp_mask[3] (in)
+  42.402   92.402 ^ _059383_/Y (AO21x1_ASAP7_75t_R)
+   0.000   92.402 ^ u_fast.g_banks[3].u_bank/ce_in (fakeram7_256x8)
+           92.402   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ u_fast.g_banks[3].u_bank/clk (fakeram7_256x8)
+  50.000   60.000   library hold time
+           60.000   data required time
+-----------------------------------------------------------
+           60.000   data required time
+          -92.402   data arrival time
+-----------------------------------------------------------
+           32.402   slack (MET)
+
+
+Startpoint: bd_fp_mask[4] (input port clocked by clk)
+Endpoint: u_fast.g_banks[4].u_bank
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  50.000   50.000 ^ input external delay
+   0.000   50.000 ^ bd_fp_mask[4] (in)
+  42.402   92.402 ^ _059367_/Y (AO21x1_ASAP7_75t_R)
+   0.000   92.402 ^ u_fast.g_banks[4].u_bank/ce_in (fakeram7_256x8)
+           92.402   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+  10.000   10.000   clock uncertainty
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ u_fast.g_banks[4].u_bank/clk (fakeram7_256x8)
+  50.000   60.000   library hold time
+           60.000   data required time
+-----------------------------------------------------------
+           60.000   data required time
+          -92.402   data arrival time
+-----------------------------------------------------------
+           32.402   slack (MET)
+
+

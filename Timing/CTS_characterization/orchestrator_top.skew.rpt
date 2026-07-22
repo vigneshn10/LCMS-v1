@@ -1,0 +1,8 @@
+Clock clk
+ 379.13 source latency _109614_/CLK ^
+-243.77 target latency u_fast.g_banks[6].u_bank/clk ^
+  80.00 clock uncertainty
+   0.00 CRPR
+--------------
+ 215.36 setup skew
+

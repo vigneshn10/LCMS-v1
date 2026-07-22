@@ -1,0 +1,27 @@
+Total number of Clock Roots: 2.
+Total number of Buffers Inserted: 749.
+Total number of Clock Subnets: 749.
+Total number of Sinks: 10398.
+Buffers used:
+  BUFx24_ASAP7_75t_R: 683
+  BUFx4_ASAP7_75t_R: 67
+Dummys used:
+  BUFx24_ASAP7_75t_R: 10
+  BUFx2_ASAP7_75t_R: 129
+  BUFx4_ASAP7_75t_R: 1
+  BUFx8_ASAP7_75t_R: 9
+  CKINVDCx11_ASAP7_75t_L: 10
+  CKINVDCx16_ASAP7_75t_R: 8
+  CKINVDCx20_ASAP7_75t_R: 2
+  CKINVDCx20_ASAP7_75t_SL: 2
+  CKINVDCx5p33_ASAP7_75t_L: 1
+  CKINVDCx6p67_ASAP7_75t_L: 15
+  INVx1_ASAP7_75t_L: 2
+  INVx2_ASAP7_75t_R: 9
+  INVx2_ASAP7_75t_SL: 9
+  INVx3_ASAP7_75t_R: 2
+  INVx3_ASAP7_75t_L: 3
+  INVx4_ASAP7_75t_SL: 3
+  INVx5_ASAP7_75t_R: 1
+  INVx5_ASAP7_75t_SL: 4
+  INVx6_ASAP7_75t_R: 1

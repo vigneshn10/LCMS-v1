@@ -1,0 +1,12 @@
+============ CTS CHARACTERIZATION : orchestrator_top ============
+stage             : post-CTS (placement parasitics - NOT routed)
+clock period      : 4000 ps (250.0 MHz)
+clock uncertainty : 80.0 ps
+fmax estimate     : 339.2 MHz  (period 4000 ps - worst slack 1051.5 ps = 2948.5 ps critical path)
+----------------------------------------------------
+die  206.80 x 206.80 um   core 196.72 x 196.56 um
+cell area 8845.42 um^2   (64528 functional instances)
+----------------------------------------------------
+worst slack max 1051.46
+worst slack min 3.23
+tns max 0.00

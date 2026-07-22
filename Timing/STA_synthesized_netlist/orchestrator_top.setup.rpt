@@ -1,0 +1,380 @@
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _107985_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 ^ input external delay
+   0.000  100.000 ^ rst_n (in)
+   0.000  100.000 ^ _107985_/SETN (DFFASRHQNx1_ASAP7_75t_R)
+          100.000   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _107985_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -4.554 5385.446   library recovery time
+         5385.446   data required time
+-----------------------------------------------------------
+         5385.446   data required time
+         -100.000   data arrival time
+-----------------------------------------------------------
+         5285.446   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _107993_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 ^ input external delay
+   0.000  100.000 ^ rst_n (in)
+   0.000  100.000 ^ _107993_/SETN (DFFASRHQNx1_ASAP7_75t_R)
+          100.000   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _107993_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -4.554 5385.446   library recovery time
+         5385.446   data required time
+-----------------------------------------------------------
+         5385.446   data required time
+         -100.000   data arrival time
+-----------------------------------------------------------
+         5285.446   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _108001_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 ^ input external delay
+   0.000  100.000 ^ rst_n (in)
+   0.000  100.000 ^ _108001_/SETN (DFFASRHQNx1_ASAP7_75t_R)
+          100.000   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108001_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -4.554 5385.446   library recovery time
+         5385.446   data required time
+-----------------------------------------------------------
+         5385.446   data required time
+         -100.000   data arrival time
+-----------------------------------------------------------
+         5285.446   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _108009_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 ^ input external delay
+   0.000  100.000 ^ rst_n (in)
+   0.000  100.000 ^ _108009_/SETN (DFFASRHQNx1_ASAP7_75t_R)
+          100.000   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108009_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -4.554 5385.446   library recovery time
+         5385.446   data required time
+-----------------------------------------------------------
+         5385.446   data required time
+         -100.000   data arrival time
+-----------------------------------------------------------
+         5285.446   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _108017_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 ^ input external delay
+   0.000  100.000 ^ rst_n (in)
+   0.000  100.000 ^ _108017_/SETN (DFFASRHQNx1_ASAP7_75t_R)
+          100.000   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108017_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -4.554 5385.446   library recovery time
+         5385.446   data required time
+-----------------------------------------------------------
+         5385.446   data required time
+         -100.000   data arrival time
+-----------------------------------------------------------
+         5285.446   slack (MET)
+
+
+Startpoint: outcome_addr[12] (input port clocked by clk)
+Endpoint: _108246_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 v input external delay
+   0.000  100.000 v outcome_addr[12] (in)
+  39.731  139.731 v _058469_/Y (XNOR2xp5_ASAP7_75t_R)
+  29.760  169.491 v _058470_/Y (XNOR2xp5_ASAP7_75t_R)
+  35.636  205.127 v _058471_/Y (XNOR2xp5_ASAP7_75t_R)
+  16.534  221.661 ^ _058472_/Y (INVx1_ASAP7_75t_R)
+  61.479  283.140 v _058473_/Y (NOR2xp33_ASAP7_75t_R)
+ 762.705 1045.844 ^ _058499_/Y (NAND2xp33_ASAP7_75t_R)
+ 173.925 1219.770 v _058724_/Y (OAI222xp33_ASAP7_75t_R)
+  62.915 1282.685 v _058726_/Y (OR4x1_ASAP7_75t_R)
+  34.024 1316.709 ^ _058727_/Y (NOR5xp2_ASAP7_75t_R)
+  25.761 1342.471 v _058728_/Y (OAI221xp5_ASAP7_75t_R)
+  40.162 1382.633 ^ _058729_/Y (NOR3xp33_ASAP7_75t_R)
+  23.410 1406.043 v _058730_/Y (NOR2xp33_ASAP7_75t_R)
+  21.692 1427.735 ^ _059073_/Y (AOI211xp5_ASAP7_75t_R)
+  21.015 1448.750 v _059075_/Y (NAND4xp25_ASAP7_75t_R)
+  94.140 1542.890 ^ _059079_/Y (NOR5xp2_ASAP7_75t_R)
+  52.687 1595.577 ^ _060968_/Y (AND3x1_ASAP7_75t_R)
+  13.737 1609.314 v _060969_/Y (INVx1_ASAP7_75t_R)
+2983.415 4592.729 ^ _082048_/Y (NAND2xp33_ASAP7_75t_R)
+ 519.740 5112.469 v _093292_/Y (O2A1O1Ixp33_ASAP7_75t_R)
+ 100.415 5212.884 v _093293_/Y (AO21x1_ASAP7_75t_R)
+   0.000 5212.884 v _108246_/D (DFFASRHQNx1_ASAP7_75t_R)
+         5212.884   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108246_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -9.387 5380.612   library setup time
+         5380.612   data required time
+-----------------------------------------------------------
+         5380.612   data required time
+         -5212.884   data arrival time
+-----------------------------------------------------------
+          167.729   slack (MET)
+
+
+Startpoint: outcome_addr[12] (input port clocked by clk)
+Endpoint: _108247_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 v input external delay
+   0.000  100.000 v outcome_addr[12] (in)
+  39.731  139.731 v _058469_/Y (XNOR2xp5_ASAP7_75t_R)
+  29.760  169.491 v _058470_/Y (XNOR2xp5_ASAP7_75t_R)
+  35.636  205.127 v _058471_/Y (XNOR2xp5_ASAP7_75t_R)
+  16.534  221.661 ^ _058472_/Y (INVx1_ASAP7_75t_R)
+  61.479  283.140 v _058473_/Y (NOR2xp33_ASAP7_75t_R)
+ 762.705 1045.844 ^ _058499_/Y (NAND2xp33_ASAP7_75t_R)
+ 173.925 1219.770 v _058724_/Y (OAI222xp33_ASAP7_75t_R)
+  62.915 1282.685 v _058726_/Y (OR4x1_ASAP7_75t_R)
+  34.024 1316.709 ^ _058727_/Y (NOR5xp2_ASAP7_75t_R)
+  25.761 1342.471 v _058728_/Y (OAI221xp5_ASAP7_75t_R)
+  40.162 1382.633 ^ _058729_/Y (NOR3xp33_ASAP7_75t_R)
+  23.410 1406.043 v _058730_/Y (NOR2xp33_ASAP7_75t_R)
+  21.692 1427.735 ^ _059073_/Y (AOI211xp5_ASAP7_75t_R)
+  21.015 1448.750 v _059075_/Y (NAND4xp25_ASAP7_75t_R)
+  94.140 1542.890 ^ _059079_/Y (NOR5xp2_ASAP7_75t_R)
+  52.687 1595.577 ^ _060968_/Y (AND3x1_ASAP7_75t_R)
+  13.737 1609.314 v _060969_/Y (INVx1_ASAP7_75t_R)
+2983.415 4592.729 ^ _082048_/Y (NAND2xp33_ASAP7_75t_R)
+ 519.740 5112.469 v _093283_/Y (O2A1O1Ixp33_ASAP7_75t_R)
+ 100.415 5212.884 v _093284_/Y (AO21x1_ASAP7_75t_R)
+   0.000 5212.884 v _108247_/D (DFFASRHQNx1_ASAP7_75t_R)
+         5212.884   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108247_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -9.387 5380.612   library setup time
+         5380.612   data required time
+-----------------------------------------------------------
+         5380.612   data required time
+         -5212.884   data arrival time
+-----------------------------------------------------------
+          167.729   slack (MET)
+
+
+Startpoint: outcome_addr[12] (input port clocked by clk)
+Endpoint: _108248_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 v input external delay
+   0.000  100.000 v outcome_addr[12] (in)
+  39.731  139.731 v _058469_/Y (XNOR2xp5_ASAP7_75t_R)
+  29.760  169.491 v _058470_/Y (XNOR2xp5_ASAP7_75t_R)
+  35.636  205.127 v _058471_/Y (XNOR2xp5_ASAP7_75t_R)
+  16.534  221.661 ^ _058472_/Y (INVx1_ASAP7_75t_R)
+  61.479  283.140 v _058473_/Y (NOR2xp33_ASAP7_75t_R)
+ 762.705 1045.844 ^ _058499_/Y (NAND2xp33_ASAP7_75t_R)
+ 173.925 1219.770 v _058724_/Y (OAI222xp33_ASAP7_75t_R)
+  62.915 1282.685 v _058726_/Y (OR4x1_ASAP7_75t_R)
+  34.024 1316.709 ^ _058727_/Y (NOR5xp2_ASAP7_75t_R)
+  25.761 1342.471 v _058728_/Y (OAI221xp5_ASAP7_75t_R)
+  40.162 1382.633 ^ _058729_/Y (NOR3xp33_ASAP7_75t_R)
+  23.410 1406.043 v _058730_/Y (NOR2xp33_ASAP7_75t_R)
+  21.692 1427.735 ^ _059073_/Y (AOI211xp5_ASAP7_75t_R)
+  21.015 1448.750 v _059075_/Y (NAND4xp25_ASAP7_75t_R)
+  94.140 1542.890 ^ _059079_/Y (NOR5xp2_ASAP7_75t_R)
+  52.687 1595.577 ^ _060968_/Y (AND3x1_ASAP7_75t_R)
+  13.737 1609.314 v _060969_/Y (INVx1_ASAP7_75t_R)
+2983.415 4592.729 ^ _082048_/Y (NAND2xp33_ASAP7_75t_R)
+ 519.740 5112.469 v _093275_/Y (O2A1O1Ixp33_ASAP7_75t_R)
+ 100.415 5212.884 v _093276_/Y (AO21x1_ASAP7_75t_R)
+   0.000 5212.884 v _108248_/D (DFFASRHQNx1_ASAP7_75t_R)
+         5212.884   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108248_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -9.387 5380.612   library setup time
+         5380.612   data required time
+-----------------------------------------------------------
+         5380.612   data required time
+         -5212.884   data arrival time
+-----------------------------------------------------------
+          167.729   slack (MET)
+
+
+Startpoint: outcome_addr[12] (input port clocked by clk)
+Endpoint: _108249_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 v input external delay
+   0.000  100.000 v outcome_addr[12] (in)
+  39.731  139.731 v _058469_/Y (XNOR2xp5_ASAP7_75t_R)
+  29.760  169.491 v _058470_/Y (XNOR2xp5_ASAP7_75t_R)
+  35.636  205.127 v _058471_/Y (XNOR2xp5_ASAP7_75t_R)
+  16.534  221.661 ^ _058472_/Y (INVx1_ASAP7_75t_R)
+  61.479  283.140 v _058473_/Y (NOR2xp33_ASAP7_75t_R)
+ 762.705 1045.844 ^ _058499_/Y (NAND2xp33_ASAP7_75t_R)
+ 173.925 1219.770 v _058724_/Y (OAI222xp33_ASAP7_75t_R)
+  62.915 1282.685 v _058726_/Y (OR4x1_ASAP7_75t_R)
+  34.024 1316.709 ^ _058727_/Y (NOR5xp2_ASAP7_75t_R)
+  25.761 1342.471 v _058728_/Y (OAI221xp5_ASAP7_75t_R)
+  40.162 1382.633 ^ _058729_/Y (NOR3xp33_ASAP7_75t_R)
+  23.410 1406.043 v _058730_/Y (NOR2xp33_ASAP7_75t_R)
+  21.692 1427.735 ^ _059073_/Y (AOI211xp5_ASAP7_75t_R)
+  21.015 1448.750 v _059075_/Y (NAND4xp25_ASAP7_75t_R)
+  94.140 1542.890 ^ _059079_/Y (NOR5xp2_ASAP7_75t_R)
+  52.687 1595.577 ^ _060968_/Y (AND3x1_ASAP7_75t_R)
+  13.737 1609.314 v _060969_/Y (INVx1_ASAP7_75t_R)
+2983.415 4592.729 ^ _082048_/Y (NAND2xp33_ASAP7_75t_R)
+ 519.740 5112.469 v _093267_/Y (O2A1O1Ixp33_ASAP7_75t_R)
+ 100.415 5212.884 v _093268_/Y (AO21x1_ASAP7_75t_R)
+   0.000 5212.884 v _108249_/D (DFFASRHQNx1_ASAP7_75t_R)
+         5212.884   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108249_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -9.387 5380.612   library setup time
+         5380.612   data required time
+-----------------------------------------------------------
+         5380.612   data required time
+         -5212.884   data arrival time
+-----------------------------------------------------------
+          167.729   slack (MET)
+
+
+Startpoint: outcome_addr[12] (input port clocked by clk)
+Endpoint: _108250_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+ 100.000  100.000 v input external delay
+   0.000  100.000 v outcome_addr[12] (in)
+  39.731  139.731 v _058469_/Y (XNOR2xp5_ASAP7_75t_R)
+  29.760  169.491 v _058470_/Y (XNOR2xp5_ASAP7_75t_R)
+  35.636  205.127 v _058471_/Y (XNOR2xp5_ASAP7_75t_R)
+  16.534  221.661 ^ _058472_/Y (INVx1_ASAP7_75t_R)
+  61.479  283.140 v _058473_/Y (NOR2xp33_ASAP7_75t_R)
+ 762.705 1045.844 ^ _058499_/Y (NAND2xp33_ASAP7_75t_R)
+ 173.925 1219.770 v _058724_/Y (OAI222xp33_ASAP7_75t_R)
+  62.915 1282.685 v _058726_/Y (OR4x1_ASAP7_75t_R)
+  34.024 1316.709 ^ _058727_/Y (NOR5xp2_ASAP7_75t_R)
+  25.761 1342.471 v _058728_/Y (OAI221xp5_ASAP7_75t_R)
+  40.162 1382.633 ^ _058729_/Y (NOR3xp33_ASAP7_75t_R)
+  23.410 1406.043 v _058730_/Y (NOR2xp33_ASAP7_75t_R)
+  21.692 1427.735 ^ _059073_/Y (AOI211xp5_ASAP7_75t_R)
+  21.015 1448.750 v _059075_/Y (NAND4xp25_ASAP7_75t_R)
+  94.140 1542.890 ^ _059079_/Y (NOR5xp2_ASAP7_75t_R)
+  52.687 1595.577 ^ _060968_/Y (AND3x1_ASAP7_75t_R)
+  13.737 1609.314 v _060969_/Y (INVx1_ASAP7_75t_R)
+2983.415 4592.729 ^ _082048_/Y (NAND2xp33_ASAP7_75t_R)
+ 519.740 5112.469 v _093259_/Y (O2A1O1Ixp33_ASAP7_75t_R)
+ 100.415 5212.884 v _093260_/Y (AO21x1_ASAP7_75t_R)
+   0.000 5212.884 v _108250_/D (DFFASRHQNx1_ASAP7_75t_R)
+         5212.884   data arrival time
+
+5500.000 5500.000   clock clk (rise edge)
+   0.000 5500.000   clock network delay (ideal)
+-110.000 5390.000   clock uncertainty
+   0.000 5390.000   clock reconvergence pessimism
+         5390.000 ^ _108250_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  -9.387 5380.612   library setup time
+         5380.612   data required time
+-----------------------------------------------------------
+         5380.612   data required time
+         -5212.884   data arrival time
+-----------------------------------------------------------
+          167.729   slack (MET)
+
+
