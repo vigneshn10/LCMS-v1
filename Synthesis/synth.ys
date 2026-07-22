@@ -1,0 +1,13 @@
+
+read_liberty -lib /content/workspace/asap7_merged_RVT_TT.lib
+read_verilog -sv -I /content/workspace /content/workspace/design.sv
+hierarchy -top orchestrator_top
+blackbox fakeram7_256x8
+synth -top orchestrator_top -flatten
+dfflibmap -liberty /content/workspace/asap7_merged_RVT_TT.lib
+abc -liberty /content/workspace/asap7_merged_RVT_TT.lib
+opt_clean -purge
+setundef -zero
+tee -o /content/synth/stat_gate.txt stat -liberty /content/workspace/asap7_merged_RVT_TT.lib
+write_verilog -noattr -noexpr /content/synth/orchestrator_top.syn.v
+write_json /content/synth/orchestrator_top.syn.json

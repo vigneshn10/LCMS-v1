@@ -1,0 +1,81 @@
+
+9. Printing statistics.
+
+=== orchestrator_top ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    54828        - wires
+    55335        - wire bits
+       73        - public wires
+      576        - public wire bits
+       33        - ports
+      344        - port bits
+    55055   6788.2 cells
+      473   41.378   A2O1A1Ixp33_ASAP7_75t_R
+      230   30.181   A2O1A1O1Ixp25_ASAP7_75t_R
+      247   21.608   AND2x2_ASAP7_75t_R
+      163   14.259   AND3x1_ASAP7_75t_R
+       57    5.817   AND4x1_ASAP7_75t_R
+        1    0.117   AND5x1_ASAP7_75t_R
+        2    0.467   AO211x2_ASAP7_75t_R
+      684   59.836   AO21x1_ASAP7_75t_R
+        5    0.729   AO221x1_ASAP7_75t_R
+       59    7.742   AO22x1_ASAP7_75t_R
+        1    0.233   AO31x2_ASAP7_75t_R
+       78    9.098   AO32x1_ASAP7_75t_R
+        2    0.292   AO33x2_ASAP7_75t_R
+      287   25.107   AOI211xp5_ASAP7_75t_R
+     6003  437.619   AOI21xp33_ASAP7_75t_R
+      151   15.411   AOI221xp5_ASAP7_75t_R
+       40    5.832   AOI222xp33_ASAP7_75t_R
+      357    31.23   AOI22xp33_ASAP7_75t_R
+        9    0.919   AOI311xp33_ASAP7_75t_R
+       81    7.086   AOI31xp33_ASAP7_75t_R
+        1    0.117   AOI321xp33_ASAP7_75t_R
+       20    2.041   AOI32xp33_ASAP7_75t_R
+        3     0.35   AOI33xp33_ASAP7_75t_R
+     1592  603.495   DFFASRHQNx1_ASAP7_75t_R
+     8796 2.56E+03   DFFHQNx1_ASAP7_75t_R
+     1399   61.192   INVx1_ASAP7_75t_R
+      576   58.787   MAJIxp5_ASAP7_75t_R
+      152   19.945   MAJx2_ASAP7_75t_R
+     2511  146.442   NAND2xp33_ASAP7_75t_R
+      359   26.171   NAND3xp33_ASAP7_75t_R
+      327   28.606   NAND4xp25_ASAP7_75t_R
+       16    1.633   NAND5xp2_ASAP7_75t_R
+     6101   355.81   NOR2xp33_ASAP7_75t_R
+      326   23.765   NOR3xp33_ASAP7_75t_R
+     1135    99.29   NOR4xp25_ASAP7_75t_R
+       34     3.47   NOR5xp2_ASAP7_75t_R
+      828   72.433   O2A1O1Ixp33_ASAP7_75t_R
+       38    4.432   OA211x2_ASAP7_75t_R
+      126    12.86   OA21x2_ASAP7_75t_R
+       44    7.698   OA222x2_ASAP7_75t_R
+       25    3.645   OA22x2_ASAP7_75t_R
+        3    0.656   OA31x2_ASAP7_75t_R
+        3    0.437   OA33x2_ASAP7_75t_R
+      167   14.609   OAI211xp5_ASAP7_75t_R
+     7250  528.525   OAI21xp33_ASAP7_75t_R
+      331   33.782   OAI221xp5_ASAP7_75t_R
+      428   62.402   OAI222xp33_ASAP7_75t_R
+     5375  470.205   OAI22xp33_ASAP7_75t_R
+       22    2.245   OAI311xp33_ASAP7_75t_R
+      100    8.748   OAI31xp33_ASAP7_75t_R
+       38    4.432   OAI321xp33_ASAP7_75t_R
+       39     3.98   OAI32xp33_ASAP7_75t_R
+       27    3.149   OAI33xp33_ASAP7_75t_R
+     4208  368.116   OR2x2_ASAP7_75t_R
+      236   20.645   OR3x1_ASAP7_75t_R
+       78    7.961   OR4x1_ASAP7_75t_R
+        2    0.233   OR5x1_ASAP7_75t_R
+     2308  302.856   XNOR2xp5_ASAP7_75t_R
+     1091  143.161   XOR2xp5_ASAP7_75t_R
+       10        -   fakeram7_256x8
+
+   Area for cell type \fakeram7_256x8 is unknown!
+
+   Chip area for module '\orchestrator_top': 6788.200140
+     of which used for sequential elements: 3168.408960 (46.68%)
+
