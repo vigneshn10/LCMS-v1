@@ -4,10 +4,12 @@ A two-tier learned cache-management accelerator in SystemVerilog, synthesized to
 the ASAP7 7nm predictive PDK and closed with a violation-free static timing
 analysis.
 
-The design predicts whether a cache line is worth keeping, and *learns the
-prediction policy at runtime* — a fast path answers every request in one cycle,
-while a slow path trains a GRU meta-learner in the background off the critical
-path.
+The design predicts whether a cache line is worth keeping and adapts the
+prediction policy at runtime. A fast path answers every request in one cycle,
+while a slow path runs a GRU meta-controller in the background, off the critical
+path. The GRU parameters are loaded before operation; the RTL performs recurrent
+inference and hidden-state adaptation, not gradient-based training of those
+parameters.
 
 ---
 
@@ -50,6 +52,104 @@ applies atomically through a tuning latch.
 **Orchestrator** — samples 1 in 4 predictions into a 64-entry table, joins them
 with outcomes when they arrive, feeds labelled observations to the learner,
 arbitrates the CSR/debug backdoor, and exposes statistics counters.
+
+## Methodology
+
+### 1. Model initialization and operating assumptions
+
+LCMS is a policy accelerator, not a complete cache. A cache controller supplies
+the request context (`pc`, 48-bit address, set index, PC history, and a reuse
+bucket), consumes the keep/bypass prediction, and later returns the observed
+outcome for the same address. Before traffic starts, the controller must use the
+quiescent backdoor to initialize the seven fast-path weight SRAMs and the three
+GRU parameter SRAMs. The behavioral SRAM intentionally powers up unknown, so an
+uninitialized simulation is not a meaningful model run.
+
+All logic is in one clock domain in v1. The fast path is allowed to drop or defer
+learning work but is never allowed to delay a prediction. The slow path therefore
+operates as a best-effort consumer whose pressure is visible through counters.
+
+### 2. One-cycle prediction
+
+For every accepted request, the fast path derives seven 8-bit indices by
+XOR-folding different views of the request: PC, PC/address, address, tag/set,
+PC history, history/address, and reuse-bucket/PC/set. Each index addresses an
+independent 256×8 signed-weight SRAM. The SRAMs provide their registered read
+outputs one cycle later.
+
+Each signed weight is multiplied by its unsigned Q1.7 gate, shifted back by
+seven fractional bits, and added through a balanced three-level tree. A
+non-negative sum predicts keep/reuse; a negative sum predicts bypass/dead. The
+absolute sum is compared with the 11-bit `theta` value to mark low-confidence
+decisions. The same cycle also exports the raw, pre-gate weights and the exact
+indices used, preserving the evidence needed for later learning.
+
+### 3. Sampling and delayed-label association
+
+Outcomes may arrive thousands of cycles after prediction and out of order, so a
+FIFO cannot associate them correctly. The orchestrator samples every fourth
+completed fast-path prediction into a 64-entry direct-indexed table. An entry
+stores a partial address tag, the seven weights and indices, prediction sum,
+prediction, confidence flag, and reuse bucket. When an outcome arrives, its
+folded address selects the entry and the partial tag confirms the match.
+
+A collision replaces the older sample and increments the eviction counter. A
+matching outcome is consumed only when the slow path is ready; otherwise it is
+dropped and counted. This bounded, explicitly lossy scheme protects prediction
+latency while making sampling pressure and aliasing measurable rather than
+implicit.
+
+### 4. Recurrent meta-control
+
+An accepted labelled observation becomes a 16-element fixed-point feature
+vector: seven raw perspective weights, the scaled prediction sum, prediction,
+low-confidence flag, outcome, agreement flag, reuse bucket, a constant feature,
+and two reserved zeros. The 8-hidden-unit GRU streams its parameters from three
+256×8 SRAM banks. Its serialized FSM computes reset/update gates, the candidate
+state, the recurrent-state blend, and a nine-output head.
+
+The first seven head outputs become perspective gates, output eight becomes
+`theta`, and output nine becomes a teacher direction for fast-path perceptron
+updates. Hidden state persists across accepted observations, so the sampled
+runtime stream is the sequence. The normal mode progression is
+`OFF → OBSERVE → TUNE+LABEL`: 32 observations warm the recurrent state, then a
+new gate/theta bundle is emitted every 64 accepted observations. Gates and theta
+are captured atomically so a prediction cannot mix epochs.
+
+### 5. Background perceptron updates
+
+Teacher events carry the original seven indices plus an increment/decrement
+direction into a four-entry fast-path queue. Each event becomes a saturating
+signed-8-bit ±1 read-modify-write across all seven SRAM banks. Arbitration is
+strictly `debug > prediction > update`; updates use only cycles on which the
+banks are not serving a request. Sustained request traffic can therefore
+backpressure training indefinitely, but it cannot stall inference.
+
+### 6. Numerical method
+
+The design uses integer-only fixed point. GRU weights and biases are signed
+Q2.6; features, hidden state, and candidate state are signed Q1.7; sigmoid
+outputs use unsigned Q1.7; and 24-bit accumulators provide four guard bits over
+the calculated worst case. Sigmoid and tanh use a bounded lookup table with
+interpolation. Fast-path perceptron bytes are reinterpreted as Q1.7 before gate
+scaling. The complete bit-level contract and SRAM map are recorded in
+[`DESIGN_NOTES.md`](DESIGN_NOTES.md).
+
+### 7. Verification and implementation method
+
+Verification is layered. The fast and slow blocks replay deterministic JSONL
+vectors against independent Python reference models. The integrated bench then
+checks RAM behavior, latency, sampler allocation/completion races, deliberate
+drop behavior, aliasing, training starvation, tuning activity, and counters.
+The integrated “learning” test proves that the adaptation path executes; it is
+not a statistical claim that accuracy converges or improves on a workload.
+
+Synthesis uses Yosys with ASAP7 rev28 RVT cells and ten black-box-compatible
+256×8 FakeRAM macros. The published STA is pre-layout, with ideal interconnect
+and clock, while the separate CTS characterization adds placement-estimated
+parasitics, clock-tree synthesis, and timing repair. These are reproducible
+engineering characterizations, not silicon measurements; the exact constraints
+and reports are checked in under [`Timing/`](Timing/).
 
 ## Results
 
@@ -103,7 +203,25 @@ cocotb testbenches against golden reference vectors, all passing:
 - **Fast path** — 256-vector golden replay, observation-port checks
 - **Slow path** — golden vector replay
 - **Integrated** — 9 suites: replay, RAM behaviour, timing, sampler race,
-  drop policy, join aliasing, training starvation, learning convergence, summary
+  drop policy, join aliasing, training starvation, learning activity, summary
+
+### Reproduce the RTL verification
+
+Requirements are Python 3.9–3.13, Icarus Verilog, and the pinned Python
+dependency in [`requirements.txt`](requirements.txt). cocotb 2.0.1 does not
+support Python 3.14. From the repository root:
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --requirement requirements.txt
+./RTL/run_all.sh
+```
+
+Set `PYTHON` to a different interpreter or `SIM` to another cocotb-supported
+simulator if needed. Each suite can also be run directly, for example
+`./RTL/Cache/run.sh`. The same aggregate command runs in GitHub Actions on every
+push and pull request.
 
 ## Repository layout
 
@@ -157,3 +275,51 @@ measurements rather than intuition:
 ## License
 
 Mozilla Public License 2.0 — see [LICENSE](LICENSE).
+
+## Research lineage and verification disclosure
+
+LCMS is an original RTL integration, not a reproduction of one paper. Its
+closest research lineage is listed below. The sampler/table association follows
+sampling dead-block prediction; the seven hashed perspectives and signed online
+updates follow perceptron and multiperspective reuse prediction; the recurrent
+controller draws on GRUs and learned optimizers; and the teacher-label loop is
+related to dataset aggregation. SHiP, Hawkeye, and LeCaR are included as the
+most relevant neighboring cache-policy work used to compare and sanity-check
+the design choices.
+
+1. D. A. Jiménez and E. Teran, “Multiperspective Reuse Prediction,” *MICRO-50*,
+   pp. 436–448, 2017. [doi:10.1145/3123939.3123942](https://doi.org/10.1145/3123939.3123942)
+2. E. Teran, Z. Wang, and D. A. Jiménez, “Perceptron Learning for Reuse
+   Prediction,” *MICRO-49*, pp. 1–12, 2016.
+   [doi:10.1109/MICRO.2016.7783705](https://doi.org/10.1109/MICRO.2016.7783705)
+3. S. M. Khan, Y. Tian, and D. A. Jiménez, “Sampling Dead Block Prediction for
+   Last-Level Caches,” *MICRO-43*, pp. 175–186, 2010.
+   [doi:10.1109/MICRO.2010.24](https://doi.org/10.1109/MICRO.2010.24)
+4. C.-J. Wu, A. Jaleel, W. Hasenplaugh, M. Martonosi, S. C. Steely Jr., and
+   J. Emer, “SHiP: Signature-based Hit Predictor for High Performance Caching,”
+   *MICRO-44*, pp. 430–441, 2011.
+   [doi:10.1145/2155620.2155671](https://doi.org/10.1145/2155620.2155671)
+5. A. Jain and C. Lin, “Back to the Future: Leveraging Belady’s Algorithm for
+   Improved Cache Replacement,” *ISCA-43*, pp. 78–89, 2016.
+   [doi:10.1109/ISCA.2016.17](https://doi.org/10.1109/ISCA.2016.17)
+6. K. Cho, B. van Merriënboer, Ç. Gülçehre, D. Bahdanau, F. Bougares,
+   H. Schwenk, and Y. Bengio, “Learning Phrase Representations using RNN
+   Encoder–Decoder for Statistical Machine Translation,” *EMNLP*, pp.
+   1724–1734, 2014. [arXiv:1406.1078](https://arxiv.org/abs/1406.1078)
+7. M. Andrychowicz et al., “Learning to Learn by Gradient Descent by Gradient
+   Descent,” *NeurIPS 29*, 2016.
+   [Proceedings](https://papers.nips.cc/paper_files/paper/2016/hash/fb87582825f9d28a8d42c5e5e5e8b23d-Abstract.html)
+8. S. Ross, G. Gordon, and D. Bagnell, “A Reduction of Imitation Learning and
+   Structured Prediction to No-Regret Online Learning,” *AISTATS*, PMLR 15,
+   pp. 627–635, 2011. [PMLR](https://proceedings.mlr.press/v15/ross11a.html)
+9. G. Vietri et al., “Driving Cache Replacement with ML-based LeCaR,”
+   *HotStorage ’18*, 2018.
+   [USENIX](https://www.usenix.org/conference/hotstorage18/presentation/vietri)
+
+OpenAI Codex and Anthropic Claude were used as AI-assisted code-review and
+documentation-review tools during verification. Their output was treated as a
+hypothesis source, not proof: source-path fixes were checked on a clean clone,
+RTL claims were checked against the implementation, and behavioral claims were
+accepted only when reproduced by the cocotb suites. Product references:
+[OpenAI Codex documentation](https://developers.openai.com/) and
+[Anthropic Claude Code documentation](https://code.claude.com/docs/en/overview).

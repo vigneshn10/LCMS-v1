@@ -383,9 +383,9 @@ if __name__ == "__main__":
 
                    always=True)
         if "sources" in inspect.signature(runner.build).parameters:
-            bkw["sources"] = [proj_path / "design.sv"]
+            bkw["sources"] = [proj_path / "fastpath.sv"]
         else:
-            bkw["verilog_sources"] = [proj_path / "design.sv"]
+            bkw["verilog_sources"] = [proj_path / "fastpath.sv"]
         runner.build(**bkw)
 
         tkw = dict(hdl_toplevel="fastpath_top", test_module="testbench")
@@ -402,7 +402,7 @@ if __name__ == "__main__":
         vvp_out = build / "sim.vvp"
         subprocess.check_call(
             ["iverilog", "-g2012", "-o", str(vvp_out), "-s", "fastpath_top",
-             "-D", "COCOTB_SIM=1", "-I", str(proj_path), str(proj_path / "design.sv")])
+             "-D", "COCOTB_SIM=1", "-I", str(proj_path), str(proj_path / "fastpath.sv")])
         env = dict(os.environ,
                    MODULE="testbench",
                    TOPLEVEL="fastpath_top",

@@ -1,5 +1,12 @@
-cd /home/runner
-export PATH=/usr/bin:/bin:/tool/pandora64/bin:/usr/local/bin
-export EDATOOL=icarus
-export HOME=/home/runner
-export SIM=icarus; python3 testbench.py ; echo 'Creating result.zip...' && zip -r /tmp/tmp_zip_file_123play.zip . && mv /tmp/tmp_zip_file_123play.zip result.zip
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_BIN="${PYTHON:-python3}"
+if [[ "$PYTHON_BIN" == */* ]]; then
+    PYTHON_BIN="$(cd -- "$(dirname -- "$PYTHON_BIN")" && pwd)/$(basename -- "$PYTHON_BIN")"
+fi
+
+export SIM="${SIM:-icarus}"
+cd "$SCRIPT_DIR"
+exec "$PYTHON_BIN" testbench.py

@@ -249,10 +249,8 @@ if __name__ == "__main__":
 
     runner = get_runner(sim)
     runner.build(
-
-        verilog_sources=[proj_path / "design.sv"],
+        sources=[proj_path / "slowpath.sv"],
         includes=[proj_path],
-
         hdl_toplevel="slowpath_top",
         always=True,
     )
@@ -260,5 +258,4 @@ if __name__ == "__main__":
         hdl_toplevel="slowpath_top",
         test_module="testbench",
         test_dir=proj_path,
-
     )
