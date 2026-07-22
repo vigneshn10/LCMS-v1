@@ -3,11 +3,11 @@
 
 Written 2026-07-22. Every feasibility verdict below was made by reading the
 actual RTL under `RTL/`, then challenged in AI-assisted review passes using
-Anthropic Claude and OpenAI Codex. A claim was retained only when it could be
-confirmed in source, simulation, or generated reports; model agreement alone
-was not treated as verification. See the main README’s [verification
-disclosure](README.md#research-lineage-and-verification-disclosure). Baseline
-numbers are measured, not estimated.
+**Anthropic Claude Opus 4.8** and **OpenAI GPT-5.6 Sol (through Codex)**. A
+claim was retained only when it could be confirmed in source, simulation, or
+generated reports; model agreement alone was not treated as verification. See
+the main README’s alphabetical [research and model references](README.md#research-lineage-and-verification-disclosure).
+Baseline numbers are measured, not estimated.
 
 ---
 

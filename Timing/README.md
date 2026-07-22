@@ -55,8 +55,8 @@ Timing is one layer of the project methodology; it does not validate prediction
 quality. The end-to-end algorithm, verification boundaries, research citations,
 and AI-assisted review disclosure are documented in the main README’s
 [methodology](../README.md#methodology) and [research-lineage and verification
-section](../README.md#research-lineage-and-verification-disclosure). OpenAI
-Codex and Anthropic Claude assisted review, but report files and reproducible
-tool runs—not model agreement—are the timing evidence. Official product
-references: [OpenAI Codex](https://developers.openai.com/) and [Anthropic Claude
-Code](https://code.claude.com/docs/en/overview).
+section](../README.md#research-lineage-and-verification-disclosure). AI-assisted
+review used **Anthropic Claude Opus 4.8** and **OpenAI GPT-5.6 Sol (through
+Codex)**, but report files and reproducible tool runs—not model agreement—are
+the timing evidence. The official model references are listed alphabetically in
+the main README.
