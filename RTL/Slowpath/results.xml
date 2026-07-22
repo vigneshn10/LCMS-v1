@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1784341192" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="163" name="slowpath_all" ratio_time="19865.68646356288" sim_time_ns="844691.001" time="42.52010130882263" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,14 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1784565035" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="243" name="test_1_replay" ratio_time="18443.888435848086" sim_time_ns="232041.001" time="12.580915451049805" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="321" name="test_2_ram" ratio_time="14000.61799076168" sim_time_ns="42821.00099999999" time="3.0585079193115234" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="396" name="test_3_timing" ratio_time="14055.634704123646" sim_time_ns="28261.001000000047" time="2.010652780532837" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="427" name="test_4_sampler_race" ratio_time="15052.277106438325" sim_time_ns="28251.00099999999" time="1.8768589496612549" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="491" name="test_5_drop_policy" ratio_time="14416.435601879095" sim_time_ns="28501.00099999999" time="1.9769797325134277" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="533" name="test_6_join_aliasing" ratio_time="12974.88667243475" sim_time_ns="28151.00099999999" time="2.1696529388427734" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="597" name="test_7_train_starve" ratio_time="14046.830819934723" sim_time_ns="32771.00099999999" time="2.332981824874878" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="674" name="test_8_learning" ratio_time="18846.459286965975" sim_time_ns="486621.00100000005" time="25.820287704467773" />
+    <testcase classname="testbench" file="/home/runner/testbench.py" lineno="731" name="test_9_summary" ratio_time="9617.124412341453" sim_time_ns="51.00099999993108" time="0.005303144454956055" />
+  </testsuite>
+</testsuites>
