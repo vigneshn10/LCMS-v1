@@ -1,8 +1,7 @@
-# LCMS — Learned Cache Management System (v1)
+# LCMS - Learned Cache Management System (v1)
 
-A two-tier learned cache-management accelerator in SystemVerilog, synthesized to
-the ASAP7 7nm predictive PDK and closed with a violation-free static timing
-analysis.
+A two-tier learned cache management accelerator in SystemVerilog, synthesized to
+the ASAP7 7nm predictive PDK.
 
 The design predicts whether a cache line is worth keeping and adapts the
 prediction policy at runtime. A fast path answers every request in one cycle,
@@ -17,7 +16,7 @@ parameters.
 
 ```
                    ┌─────────────────────────────────────────┐
-   request ───────►│  FAST PATH  (latency)                   │───► keep / bypass
+   request ───────►│  FAST PATH                              │───► keep / bypass
                    │  7-perspective hashed perceptron        │     + confidence
                    │  7 × 256×8 SRAM weight banks            │
                    │  1-cycle prediction, RMW training queue │
@@ -25,18 +24,18 @@ parameters.
                     observations│      ▲ gates, theta
                                 ▼      │
                    ┌─────────────────────────────────────────┐
-                   │  SLOW PATH  (throughput)                │
+                   │  SLOW PATH                              │
                    │  GRU meta-learner, 3 × 256×8 SRAM banks │
                    │  learns the per-perspective gates       │
                    └─────────────────────────────────────────┘
                                  ▲
                    ┌─────────────┴───────────────────────────┐
                    │  ORCHESTRATOR — sampler table, mode FSM,│
-                   │  tuning latch, CSR/backdoor, statistics │
+                   │  tuning latch, statistics               │
                    └─────────────────────────────────────────┘
 ```
 
-**Fast path** — a hashed perceptron predictor with 7 independent perspectives.
+**Fast path** : a hashed perceptron predictor with 7 independent perspectives.
 Each request XOR-folds `{pc, addr, tag, pc_hist, set_idx, reuse_bucket}` into 7
 bank indices, reads one signed 8-bit weight per bank, scales each by a
 runtime-tuned Q1.7 gate, and sums them in a balanced adder tree. The sign is the
@@ -44,12 +43,12 @@ prediction; `|sum| < theta` flags low confidence. Training happens in the
 background as saturating ±1 read-modify-write pairs that drain onto bank-idle
 cycles, so a prediction is **never** stalled by learning.
 
-**Slow path** — a GRU meta-learner. One sampled observation is one GRU timestep;
+**Slow path** : a GRU meta-learner. One sampled observation is one GRU timestep;
 the hidden state persists across observations, so the sampled stream *is* the
 sequence. It outputs the 7 perceptron gates plus theta, which the orchestrator
 applies atomically through a tuning latch.
 
-**Orchestrator** — samples 1 in 4 predictions into a 64-entry table, joins them
+**Orchestrator** : samples 1 in 4 predictions into a 64-entry table, joins them
 with outcomes when they arrive, feeds labelled observations to the learner,
 arbitrates the CSR/debug backdoor, and exposes statistics counters.
 
@@ -223,30 +222,11 @@ simulator if needed. Each suite can also be run directly, for example
 `./RTL/Cache/run.sh`. The same aggregate command runs in GitHub Actions on every
 push and pull request.
 
-## Repository layout
-
-```
-RTL/
-  Fastpath/      fastpath.sv, cocotb testbench, golden vectors, SRAM model
-    golden/      standalone EDA-Playground bundle + reference model
-  Slowpath/      slowpath.sv, testbench, vectors, SRAM model
-  Cache/         orchestrator_top.sv + both paths, integrated testbench
-Synthesis/       synth.ys, synth.log, gate netlist (.v/.json), cell statistics
-Schematics/      SVG schematics of each module and the full architecture
-  dot_sources/   the graphviz sources they were rendered from
-Timing/
-  STA_synthesized_netlist/   the violation-free STA: SDC, setup/hold paths,
-                             endpoint sweeps, check_setup, run log
-  CTS_characterization/      post-CTS timing, skew, clock-tree stats, power
-  scripts/                   run_sta.sh / run_cts.sh + their Tcl, to reproduce
-V2_ROADMAP.md    measured findings and the plan for v2
-```
-
 ## Reproducing the timing reports
 
 The scripts in [`Timing/scripts/`](Timing/scripts/) run on OpenROAD with the
 ASAP7 libraries. They expect a kit directory (`$KIT`) holding the OpenROAD
-binary, the ASAP7 LEF/Liberty files, and the synthesized netlist — the PDK and
+binary, the ASAP7 LEF/Liberty files, and the synthesized netlist, the PDK and
 the tool binary are not redistributed here.
 
 ```bash
@@ -257,24 +237,18 @@ KIT=/path/to/kit CLK_PS=6000 ./run_sta.sh
 `run_sta.tcl` writes the SDC it uses into the results directory, so the
 published constraints are byte-for-byte the ones that produced the report.
 
-## What's next (v2)
+## Future Scope (v2)
 
 [`V2_ROADMAP.md`](V2_ROADMAP.md) has the detail. The short version, from
 measurements rather than intuition:
 
 - The frequency limiter is **not** the fast path's dot product — that cone has
   +922 ps of slack. Every violating endpoint at 333 MHz belongs to the slow
-  path's GRU activation chains. Fixing those is the actual unlock.
-- The fast path is **already latency-optimal**: its only pipeline boundary is
-  the SRAM's internal synchronous-read register, so there is no stage to remove.
-  1-cycle prediction is the floor for this memory technology.
+  path's GRU activation chains. Fixing those is the prime goal in v2.
 - v2 keeps module hierarchy through synthesis (v1 flattened, which foreclosed
   per-path optimization), moves to a PDK with real SRAM macros, and introduces
-  UVM verification.
+  UVM verification and possibly simulations on real physical RAM.
 
-## License
-
-Mozilla Public License 2.0 — see [LICENSE](LICENSE).
 
 ## Research lineage and verification disclosure
 
@@ -288,7 +262,7 @@ dead-block prediction, perceptron branch prediction, SHiP, Hawkeye, and LeCaR
 provide the foundational or neighboring work used to compare and sanity-check
 the design choices.
 
-### Research references (alphabetical by first author)
+### Research references
 
 1. M. Andrychowicz, M. Denil, S. Gómez, M. W. Hoffman, D. Pfau, T. Schaul,
    B. Shillingford, and N. de Freitas, “Learning to Learn by Gradient Descent
@@ -341,15 +315,16 @@ the design choices.
     *MICRO-44*, pp. 430–441, 2011.
     [doi:10.1145/2155620.2155671](https://doi.org/10.1145/2155620.2155671)
 
-### AI-assisted verification references (alphabetical by organization)
+### AI-assisted verification references
 
-AI-assisted code and documentation review used **Anthropic Claude Opus 4.8**
-and **OpenAI GPT-5.6 Sol (through Codex)**. Their output was treated as a
+AI-assisted code and documentation, used **Anthropic Claude Opus 4.8**
+and **OpenAI GPT-5.6 Sol**. Their output was treated as a
 hypothesis source, not proof: source-path fixes were checked on a clean clone,
 RTL claims were checked against the implementation, and behavioral claims were
 accepted only when reproduced by the cocotb suites.
 
-1. Anthropic, “Claude Opus 4.8 System Card,” 2026.
-   [System card](https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea/Claude%20Opus%204.8%20System%20Card.pdf)
-2. OpenAI, “GPT-5.6 Sol Model,” 2026.
-   [Official model documentation](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+
+
+## License
+
+Mozilla Public License 2.0 — see [LICENSE](LICENSE).
